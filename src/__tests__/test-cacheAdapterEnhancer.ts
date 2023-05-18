@@ -6,7 +6,7 @@
 
 import test from 'ava';
 import axios, { AxiosPromise } from 'axios';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import { spy } from 'sinon';
 
 import cacheAdapterEnhancer from '../cacheAdapterEnhancer.js';
@@ -150,8 +150,8 @@ test('use a custom cache with request individual config', async t => {
 		adapter: cacheAdapterEnhancer(mockedAdapter),
 	});
 
-	const cache1 = new LRUCache({ max: 100 });
-	const cache2 = new LRUCache({ max: 100 });
+	const cache1 = new LRUCache<string, AxiosPromise>({ max: 100 });
+	const cache2 = new LRUCache<string, AxiosPromise>({ max: 100 });
 	await Promise.all([http.get('/users', { cache: cache1 } as any), http.get('/users', { cache: cache2 } as any)]);
 	t.is(adapterCb.callCount, 2);
 

@@ -5,7 +5,7 @@
  */
 
 import { AxiosAdapter, AxiosPromise } from 'axios';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import buildSortedURL from './utils/buildSortedURL.js';
 import isCacheLike, { ICacheLike } from './utils/isCacheLike.js';
 
@@ -30,7 +30,7 @@ export default function cacheAdapterEnhancer(adapter: AxiosAdapter, options: Opt
 	const {
 		enabledByDefault = true,
 		cacheFlag = 'cache',
-		defaultCache = new LRUCache({ ttl: FIVE_MINUTES, max: CAPACITY }),
+		defaultCache = new LRUCache<string, AxiosPromise>({ ttl: FIVE_MINUTES, max: CAPACITY }),
 	} = options;
 
 	return config => {

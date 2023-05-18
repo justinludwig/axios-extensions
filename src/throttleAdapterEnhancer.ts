@@ -5,7 +5,7 @@
  */
 
 import { AxiosAdapter, AxiosPromise, InternalAxiosRequestConfig } from 'axios';
-import LRUCache from 'lru-cache';
+import { LRUCache } from 'lru-cache';
 import buildSortedURL from './utils/buildSortedURL.js';
 import { ICacheLike } from './utils/isCacheLike';
 
