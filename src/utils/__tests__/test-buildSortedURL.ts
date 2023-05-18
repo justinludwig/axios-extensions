@@ -5,7 +5,7 @@
  */
 
 import test from 'ava';
-import buildSortedURL from '../buildSortedURL';
+import buildSortedURL from '../buildSortedURL.js';
 
 test('build a simple url without params', t => {
 

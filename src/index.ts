@@ -5,10 +5,10 @@
  */
 
 import Cache from 'lru-cache';
-import cacheAdapterEnhancer from './cacheAdapterEnhancer';
-import retryAdapterEnhancer from './retryAdapterEnhancer';
-import throttleAdapterEnhancer from './throttleAdapterEnhancer';
-import { ICacheLike } from './utils/isCacheLike';
+import cacheAdapterEnhancer from './cacheAdapterEnhancer.js';
+import retryAdapterEnhancer from './retryAdapterEnhancer.js';
+import throttleAdapterEnhancer from './throttleAdapterEnhancer.js';
+import { ICacheLike } from './utils/isCacheLike.js';
 
 export {
 	Cache,

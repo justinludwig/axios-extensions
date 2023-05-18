@@ -3,10 +3,11 @@
  * @since 2019-05-27
  */
 
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
-const builtin = require('rollup-plugin-node-builtins');
-const terser = require('rollup-plugin-terser').terser;
+import json from '@rollup/plugin-json';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import builtin from 'rollup-plugin-node-builtins';
+import terser from '@rollup/plugin-terser';
 
 function genConfig(minimize = false) {
 
@@ -16,11 +17,13 @@ function genConfig(minimize = false) {
 			name: 'axios-extensions',
 			file: minimize ? './dist/axios-extensions.min.js' : './dist/axios-extensions.js',
 			format: 'umd',
+			globals: { axios: 'axios' },
 			sourcemap: true,
 		},
 		external: ['axios'],
 		plugins: [
-			resolve(),
+			json(),
+			nodeResolve(),
 			commonjs(),
 			builtin(),
 			minimize ? terser() : void 0,
@@ -28,7 +31,7 @@ function genConfig(minimize = false) {
 	};
 }
 
-module.exports = [
+export default [
 	genConfig(),
 	genConfig(true),
-];
+]

@@ -1,0 +1,50 @@
+{
+  "extends": [
+	"eslint:recommended",
+	"plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true,
+  "rules": {
+	"indent": [
+	  "error",
+	  "tab"
+	],
+	"quotes": [
+	  "error",
+	  "single"
+	],
+	"no-console": "off",
+	"object-literal-sort-keys": "off",
+	"object-curly-spacing": [
+	  "error",
+	  "always"
+	],
+	"member-access": "off",
+	"interface-name": "off",
+	"@typescript-eslint/member-ordering": [
+	  "error",
+	  {
+		"default": [
+		  "private-static-field",
+		  "public-static-field",
+		  "private-instance-field",
+		  "public-instance-field",
+		  "private-constructor",
+		  "public-constructor",
+		  "private-instance-method",
+		  "protected-instance-method",
+		  "public-static-method",
+		  "public-instance-method"
+		]
+	  }
+	],
+	"max-classes-per-file": ["error", 5],
+	"no-unused-expressions": ["error", { "allowTernary": true }],
+	"max-len": ["error", { "code": 140 }],
+	"interface-over-type-literal": "off",
+	"@typescript-eslint/ban-ts-comment": "off",
+	"@typescript-eslint/no-explicit-any": "off"
+  }
+}

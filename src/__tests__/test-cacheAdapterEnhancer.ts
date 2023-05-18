@@ -9,7 +9,7 @@ import axios, { AxiosPromise } from 'axios';
 import LRUCache from 'lru-cache';
 import { spy } from 'sinon';
 
-import cacheAdapterEnhancer from '../cacheAdapterEnhancer';
+import cacheAdapterEnhancer from '../cacheAdapterEnhancer.js';
 
 // mock the actual request
 const genMockAdapter = (cb: any) => (config: any) => {

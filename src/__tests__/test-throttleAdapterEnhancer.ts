@@ -9,7 +9,7 @@ import axios from 'axios';
 import LRUCache from 'lru-cache';
 import { spy } from 'sinon';
 
-import throttleAdapterEnhancer, { RecordedCache } from '../throttleAdapterEnhancer';
+import throttleAdapterEnhancer, { RecordedCache } from '../throttleAdapterEnhancer.js';
 
 const genMockAdapter = (cb: any) => (config: any) => {
 	cb();

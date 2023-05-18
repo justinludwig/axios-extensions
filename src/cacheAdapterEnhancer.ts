@@ -6,8 +6,8 @@
 
 import { AxiosAdapter, AxiosPromise } from 'axios';
 import LRUCache from 'lru-cache';
-import buildSortedURL from './utils/buildSortedURL';
-import isCacheLike, { ICacheLike } from './utils/isCacheLike';
+import buildSortedURL from './utils/buildSortedURL.js';
+import isCacheLike, { ICacheLike } from './utils/isCacheLike.js';
 
 declare module 'axios' {
 	interface AxiosRequestConfig {

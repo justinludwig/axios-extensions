@@ -6,7 +6,7 @@
 import test from 'ava';
 import axios from 'axios';
 import { spy } from 'sinon';
-import retryAdapterEnhancer from '../retryAdapterEnhancer';
+import retryAdapterEnhancer from '../retryAdapterEnhancer.js';
 
 test('should retry the request with special times while request failed', async (t) => {
 

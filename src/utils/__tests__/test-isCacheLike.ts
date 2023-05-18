@@ -5,7 +5,7 @@
  */
 
 import test from 'ava';
-import isCacheLike from '../isCacheLike';
+import isCacheLike from '../isCacheLike.js';
 
 test('a object with specified method will be regard as cache', t => {
 
@@ -14,13 +14,13 @@ test('a object with specified method will be regard as cache', t => {
 
 	cache = {
 
-		// tslint:disable-next-line
+		// eslint-disable-next-line
 		get() {
 		},
-		// tslint:disable-next-line
+		// eslint-disable-next-line
 		set() {
 		},
-		// tslint:disable-next-line
+		// eslint-disable-next-line
 		del() {
 		},
 	};
