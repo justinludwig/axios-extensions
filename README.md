@@ -5,12 +5,9 @@
 [![npm downloads](https://img.shields.io/npm/dt/axios-extensions.svg?style=flat-square)](https://www.npmjs.com/package/axios-extensions)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/kuitos/axios-extensions/ci.yml?branch=master&style=flat-square)](https://github.com/kuitos/axios-extensions/actions/workflows/ci.yml)
 
-A non-invasive, simple, reliable collection of axios extension
+A non-invasive, simple, reliable collection of axios extensions. This version requires axios 1.x and lru-cache 9.x.
 
 ## Extension List
-*v3.x has a lot of api changes, if you are looking for v2.x doc, see [here](https://github.com/kuitos/axios-extensions/tree/v2.0.3)*
-
-*Not working with axios v0.19.0 as its custom config bug, See https://github.com/axios/axios/pull/2207.*   
 
 * [cacheAdapterEnhancer](#cacheadapterenhancer) makes request cacheable
 * [throttleAdapterEnhancer](#throttleadapterenhancer) makes GET requests throttled automatically
@@ -35,13 +32,14 @@ or
 
 ```javascript
 import axios from 'axios';
+import xhr from 'axios/unsafe/adapters/xhr.js';
 import { cacheAdapterEnhancer, throttleAdapterEnhancer } from 'axios-extensions';
 
-// enhance the original axios adapter with throttle and cache enhancer 
+// enhance the xhr axios adapter with throttle and cache enhancer
 const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
-	adapter: throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter))
+	adapter: throttleAdapterEnhancer(cacheAdapterEnhancer(xhr))
 });
 ```
 
@@ -87,13 +85,14 @@ Where `adapter` is an axios adapter which following the [axios adapter standard]
 
 ```javascript
 import axios from 'axios';
+import xhr from 'axios/unsafe/adapters/xhr.js';
 import { cacheAdapterEnhancer } from 'axios-extensions';
 
 const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
 	// cache will be enabled by default
-	adapter: cacheAdapterEnhancer(axios.defaults.adapter)
+	adapter: cacheAdapterEnhancer(xhr)
 });
 
 http.get('/users'); // make real http request
@@ -108,7 +107,7 @@ const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
 	// disable the default cache and set the cache flag
-	adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false, cacheFlag: 'useCache'})
+	adapter: cacheAdapterEnhancer(xhr, { enabledByDefault: false, cacheFlag: 'useCache'})
 });
 
 http.get('/users'); // default cache was disabled and then the real http request invoked 
@@ -136,13 +135,14 @@ Besides configuring the request through the `cacheAdapterEnhancer`, we can enjoy
 
 ```js
 import axios from 'axios';
+import xhr from 'axios/unsafe/adapters/xhr.js';
 import { cacheAdapterEnhancer, Cache } from 'axios-extensions';
 
 const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
 	// disable the default cache
-	adapter: cacheAdapterEnhancer(axios.defaults.adapter, { enabledByDefault: false })
+	adapter: cacheAdapterEnhancer(xhr, { enabledByDefault: false })
 });
 
 http.get('/users', { cache: true }); // make the request cacheable(real http request made due to first request invoke)
@@ -190,12 +190,13 @@ Check [David Corbacho's article](https://css-tricks.com/debouncing-throttling-ex
 
 ```js
 import axios from 'axios';
+import xhr from 'axios/unsafe/adapters/xhr.js';
 import { throttleAdapterEnhancer } from 'axios-extensions';
 
 const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
-	adapter: throttleAdapterEnhancer(axios.defaults.adapter, { threshold: 2 * 1000 })
+	adapter: throttleAdapterEnhancer(xhr, { threshold: 2 * 1000 })
 });
 
 http.get('/users'); // make real http request
@@ -224,12 +225,13 @@ Where `adapter` is an axios adapter which following the [axios adapter standard]
 
 ```ts
 import axios from 'axios';
+import xhr from 'axios/unsafe/adapters/xhr.js';
 import { retryAdapterEnhancer } from 'axios-extensions';
 
 const http = axios.create({
 	baseURL: '/',
 	headers: { 'Cache-Control': 'no-cache' },
-	adapter: retryAdapterEnhancer(axios.defaults.adapter)
+	adapter: retryAdapterEnhancer(xhr)
 });
 
 // this request will retry two times if it failed
